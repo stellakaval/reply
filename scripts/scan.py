@@ -13,6 +13,7 @@ import os
 import re
 import subprocess
 import sys
+from collections import Counter
 from datetime import date, datetime, timedelta, timezone
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -72,6 +73,10 @@ def norm_comment(platform, raw, post_ref):
         author = author.get("username") or author.get("text") or "unknown"
     author = str(author)
     ts = _pick(raw, "created_at", "timestamp", "taken_at")
+    try:
+        likes = int(_pick(raw, "like_count", "likes") or 0)
+    except (TypeError, ValueError):
+        likes = 0
     return {
         "platform": platform,
         "comment_id": cid,
@@ -79,6 +84,7 @@ def norm_comment(platform, raw, post_ref):
         "author": author,
         "author_id": str(_pick(raw, "author_id", "author_fbid") or ""),
         "text": text,
+        "like_count": likes,
         "created_at": str(ts) if ts else None,
     }
 
@@ -188,8 +194,28 @@ def scan_instagram(cfg, since_days, limit_posts, seen, own_names):
             continue
         c["category"] = cat
         queue.append(c)
+    # Engagement intel: frequent commenters get priority (relationship signals
+    # compound — the algorithm shows your posts more to people you interact with)
+    top_fans = Counter(c["author"] for c in queue).most_common(5)
+    # Pin candidate per post: most-liked substantive comment sets the thread tone
+    pin_candidates = []
+    by_post = {}
+    for c in queue:
+        by_post.setdefault(c["post_ref"], []).append(c)
+    for post_ref, comments in by_post.items():
+        best = max(comments, key=lambda c: (c["like_count"], len(c["text"])))
+        if best["like_count"] > 0 or len(best["text"]) > 40:
+            pin_candidates.append({
+                "post_ref": post_ref,
+                "comment_id": best["comment_id"],
+                "author": best["author"],
+                "text": best["text"][:120],
+                "like_count": best["like_count"],
+            })
     return queue, {"platform": "instagram", "posts_checked": len(post_ids),
-                   "queued": len(queue), "spam_filtered": spam}
+                   "queued": len(queue), "spam_filtered": spam,
+                   "top_fans": [{"author": a, "comments": n} for a, n in top_fans],
+                   "pin_candidates": pin_candidates}
 
 
 def th_account_id():
@@ -224,11 +250,14 @@ def scan_threads(cfg, since_days, limit_posts, seen, own_names):
             continue
         c["category"] = cat
         queue.append(c)
+    top_fans = Counter(c["author"] for c in queue).most_common(5)
+    report = {"platform": "threads", "queued": len(queue),
+              "spam_filtered": spam,
+              "top_fans": [{"author": a, "comments": n} for a, n in top_fans]}
     if ferr:
-        return queue, {"platform": "threads", "warning": ferr,
-                       "queued": len(queue), "spam_filtered": spam}
-    return queue, {"platform": "threads", "queued": len(queue),
-                   "spam_filtered": spam}
+        report["warning"] = ferr
+        return queue, report
+    return queue, report
 
 
 def main():
