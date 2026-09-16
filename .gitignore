@@ -1,0 +1,19 @@
+# Personal config — never commit account details
+scripts/config.json
+scripts/voice.md
+config.json
+
+# Runtime state and logs
+state/
+logs/
+*.log
+*.jsonl
+
+# Python
+__pycache__/
+*.pyc
+
+# Editors / OS
+.DS_Store
+.idea/
+.vscode/
