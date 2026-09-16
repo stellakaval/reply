@@ -1,0 +1,1 @@
+{"limit_posts":10,"notes":"Fill own_usernames with your IG/Threads handles so your own comments are skipped. Copy to config.json (gitignored).","own_usernames":[],"platforms":"instagram,threads","since_days":7}
