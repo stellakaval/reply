@@ -20,10 +20,13 @@ running inside your agent can.
    and writes a review queue to `logs/queue_YYYY-MM-DD.json`.
 2. Comments are triaged: `question`, `conversational`, `collab` (brand/deal
    inquiries surface prominently), `sensitive` (flagged, never drafted),
-   `spam` (filtered, counted).
+   `spam` (filtered, counted). The scan also reports `top_fans` (your most
+   frequent commenters — prioritize them, relationship signals compound) and
+   a `pin_candidate` per post (best comment to pin in the first hour).
 3. The agent drafts replies using your editable voice profile
-   (`scripts/voice.md`) and presents them grouped as **needs you** vs.
-   **ready to send**.
+   (`scripts/voice.md`, with a monthly trend radar) and presents them grouped
+   as **needs you** vs. **ready to send** — newest first, since the first
+   30–60 minutes after posting is the highest-leverage reply window.
 4. You approve a batch; approved comments are marked handled
    (`state/seen.json`) so the queue stays clean.
 
