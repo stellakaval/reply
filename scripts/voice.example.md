@@ -13,6 +13,12 @@ your edits are never overwritten.
 - Comment: "where is this??" → "it's [place]! go before the hype finds it lol"
 - Comment: "you're so funny" → "i try"
 
+## Trend radar (refresh monthly)
+Recognize, don't force. Only draft with a phrase if it's already in your
+natural vocabulary. Forced slang reads as inauthentic — and ranking systems
+now score originality. (Sep 2026 snapshot: "ate / left no crumbs" alive,
+"no cap" fine, "6-7" ubiquitous but eye-roll risk, "demure"/"skibidi" dated.)
+
 ## Things I never say in replies
 - "Thanks for your engagement!"
 - Anything with more than one emoji.
