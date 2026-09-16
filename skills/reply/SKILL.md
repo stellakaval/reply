@@ -72,6 +72,31 @@ and reviews the queue. For a fully hands-off digest, pair with a notifier
 that sends the queue summary (counts by category) so the user only opens the
 queue when there's something worth answering.
 
+## Engagement playbook (research-backed)
+
+Replying isn't just polite — it moves the algorithm. Studies put the
+engagement lift from replying at ~21%, and posts with lively comment threads
+get up to 70% more impressions. Draft with these mechanics in mind:
+
+- **Speed wins.** The first 30–60 minutes after posting is the highest-leverage
+  window: early replies spark the back-and-forth threads the algorithm
+  rewards. The scan defaults to recent posts for this reason — in review,
+  always work newest-first.
+- **Depth beats count.** One real exchange signals more than five one-word
+  replies. For conversational comments, end the draft with a playful question
+  or prompt when it fits — still one line, still her voice. ("obsessed?? what
+  was your favorite part" beats "obsessed!!")
+- **Relationships compound.** Instagram shows your future posts more to people
+  you consistently interact with. The scan surfaces `top_fans` — frequent
+  commenters. Prioritize them in review; never leave a top fan hanging.
+- **Pin the tone-setter.** Each post gets a `pin_candidate` — the best comment
+  to pin in the first hour. Suggest it during review; pinning early sets the
+  thread's tone and breaks the empty-room effect.
+- **Don't chase slang.** The trend radar in `voice.md` is for recognition, not
+  imitation. Forced slang reads as inauthentic, and 2026 ranking systems score
+  originality. Use a trending phrase only if it's already in her natural
+  vocabulary — when in doubt, her real voice wins.
+
 ## Safety
 
 - **Never auto-post.** There is no approved path from draft to published
